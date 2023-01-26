@@ -1,16 +1,13 @@
 package com.cardealer.models.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "sales")
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Sale extends BaseEntity {
@@ -19,6 +16,6 @@ public class Sale extends BaseEntity {
     @OneToOne
     private Car car;
 
-    @OneToOne
+    @ManyToOne(targetEntity = Customer.class, cascade = CascadeType.ALL)
     private Customer customer;
 }

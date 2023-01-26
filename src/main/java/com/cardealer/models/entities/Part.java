@@ -1,19 +1,15 @@
 package com.cardealer.models.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Set;
 
 @Entity
 @Table(name = "parts")
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Part extends BaseEntity {
@@ -23,9 +19,9 @@ public class Part extends BaseEntity {
 
     private int quantity;
 
-    @OneToOne
+    @ManyToOne(targetEntity = Supplier.class, fetch = FetchType.EAGER)
     private Supplier supplier;
 
-    @ManyToMany
-    Set<Car> cars;
+    @ManyToMany(mappedBy = "parts", cascade = CascadeType.ALL)
+    private Set<Car> cars;
 }

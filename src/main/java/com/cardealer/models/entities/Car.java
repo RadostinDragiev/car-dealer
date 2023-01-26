@@ -1,16 +1,14 @@
 package com.cardealer.models.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "cars")
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Car extends BaseEntity {
@@ -19,5 +17,8 @@ public class Car extends BaseEntity {
     private String model;
 
     @Column(name = "travelled_distance")
-    private int travelledDistance;
+    private long travelledDistance;
+
+    @ManyToMany(targetEntity = Part.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Part> parts;
 }
