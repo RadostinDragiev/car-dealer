@@ -22,6 +22,7 @@ public class ApplicationBeanConfiguration {
                 .excludeFieldsWithoutExposeAnnotation()
                 .registerTypeAdapter(LocalDateTime.class, (JsonDeserializer<LocalDateTime>) (json, type, jsonDeserializationContext) ->
                 LocalDateTime.parse(json.getAsJsonPrimitive().getAsString()))
+                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer())
                 .setPrettyPrinting()
                 .create();
     }
