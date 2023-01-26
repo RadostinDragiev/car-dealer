@@ -12,6 +12,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -40,15 +41,28 @@ public class ApplicationRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         //seedData();
 
-        orderedCustomersEx1();
+        //orderedCustomersEx1();
+
+        //carsFromMakeToyota();
+    }
+
+    // Query 2 – Cars from Make Toyota
+    private void carsFromMakeToyota() {
+        try {
+            FileWriter fileWriter = new FileWriter(TOYOTA_CARS_FILE_PATH);
+            this.gson.toJson(this.carService.getAllCarsByMake("Toyota"), fileWriter);
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("Failed to create file " + e.getMessage());
+        }
     }
 
     // Query 1 – Ordered Customers
     private void orderedCustomersEx1() {
         try {
             FileWriter fileWriter = new FileWriter(ORDERED_CUSTOMERS_FILE_PATH);
-            Set<CustomersByBirthdateJsonDto> allCustomersOrderByBirthdate = this.customerService.getAllCustomersOrderByBirthdate();
-            this.gson.toJson(allCustomersOrderByBirthdate, fileWriter);
+            this.gson.toJson(this.customerService.getAllCustomersOrderByBirthdate(), fileWriter);
             fileWriter.flush();
             fileWriter.close();
         } catch (IOException e) {
