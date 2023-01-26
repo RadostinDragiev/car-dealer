@@ -2,10 +2,7 @@ package com.cardealer.models.entities;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -20,6 +17,6 @@ public class Supplier extends BaseEntity {
     @Column(name = "is_importer")
     private boolean isImporter;
 
-    @OneToMany(mappedBy = "supplier")
+    @OneToMany(mappedBy = "supplier", fetch = FetchType.EAGER)
     private Set<Part> parts;
 }

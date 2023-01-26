@@ -10,16 +10,13 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CarsByMake {
+public class SuppliersLocalJsonDto {
     @Expose
     private long id;
 
     @Expose
-    private String make;
+    private String name;
 
     @Expose
-    private String model;
-
-    @Expose
-    private long travelledDistance;
+    private int partsCount;
 }

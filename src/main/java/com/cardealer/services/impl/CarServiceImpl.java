@@ -1,7 +1,7 @@
 package com.cardealer.services.impl;
 
 import com.cardealer.models.dtos.CarAddDto;
-import com.cardealer.models.dtos.CarsByMake;
+import com.cardealer.models.dtos.CarsByMakeJsonDto;
 import com.cardealer.models.entities.Car;
 import com.cardealer.models.entities.Part;
 import com.cardealer.repositories.CarRepository;
@@ -47,9 +47,9 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<CarsByMake> getAllCarsByMake(String make) {
+    public List<CarsByMakeJsonDto> getAllCarsByMake(String make) {
         Set<Car> carSet = this.carRepository.findAllByMakeOrderByModelAscTravelledDistanceDesc(make);
-        CarsByMake[] carsByMakes = this.modelMapper.map(carSet, CarsByMake[].class);
+        CarsByMakeJsonDto[] carsByMakes = this.modelMapper.map(carSet, CarsByMakeJsonDto[].class);
         return Arrays.stream(carsByMakes).collect(Collectors.toList());
     }
 }

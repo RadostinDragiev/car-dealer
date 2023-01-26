@@ -44,6 +44,20 @@ public class ApplicationRunner implements CommandLineRunner {
         //orderedCustomersEx1();
 
         //carsFromMakeToyota();
+
+        //localSuppliers();
+    }
+
+    // Query 3 – Local Suppliers
+    private void localSuppliers() {
+        try {
+            FileWriter fileWriter = new FileWriter(LOCAL_SUPPLIERS_FILE_PATH);
+            this.gson.toJson(this.supplierService.getLocalSuppliers(), fileWriter);
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("Failed to create file " + e.getMessage());
+        }
     }
 
     // Query 2 – Cars from Make Toyota
